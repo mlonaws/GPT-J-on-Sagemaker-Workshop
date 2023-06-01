@@ -279,7 +279,7 @@ def save_for_sm_hf_inference(model, model_config, args, seq_length=1024, transla
             
             from transformers import AutoTokenizer
             # using tokenizer from transformers
-            tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-j-6B")
+            tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-j-6b")
             tokenizer.save_pretrained(args.model_dir)
 
             model_config.save_pretrained(args.model_dir)
@@ -1097,7 +1097,7 @@ def main():
             enabled=(smp.tp_size() > 1 and args.match_weights < 1 and args.delayed_param > 0)
         ):
             if args.finetune_6b:
-                model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-j-6B", revision="float16", torch_dtype=torch.float16)
+                model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-j-6b", revision="float16", torch_dtype=torch.float16)
                 model_config = model.config
                 translated_state_dict = translate_hf_gptj_state_dict_to_smdistributed(model.state_dict(), max_seq_len=args.max_context_width)
             else:
